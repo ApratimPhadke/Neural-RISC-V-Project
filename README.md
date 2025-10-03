@@ -41,7 +41,7 @@ Get up and running in less than 5 minutes!
 #### 🐧 Linux / 🍎 macOS
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/neural-riscv-project.git
+git clone https://github.com/ApratimPhadke/neural-riscv-project.git
 cd neural-riscv-project
 
 # Run setup script
@@ -55,7 +55,7 @@ docker exec -it neural-riscv-development bash
 #### 🪟 Windows
 ```powershell
 # Clone the repository
-git clone https://github.com/yourusername/neural-riscv-project.git
+git clone https://github.com/ApratimPhadke/neural-riscv-project.git
 cd neural-riscv-project
 
 # Run setup script (PowerShell as Administrator)
