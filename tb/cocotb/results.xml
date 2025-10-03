@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1759498097" />
+    <testcase name="test_neural_riscv_performance" classname="test_neural_riscv" file="/home/abc/neural-riscv-project/tb/cocotb/test_neural_riscv.py" lineno="101" time="0.05163407325744629" sim_time_ns="10090.001" ratio_time="195413.61669631387" />
+  </testsuite>
+</testsuites>

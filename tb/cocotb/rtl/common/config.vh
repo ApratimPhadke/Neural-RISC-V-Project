@@ -1,0 +1,1 @@
+`define RESET_PC 32'h00000000
