@@ -1,0 +1,10 @@
+{
+  "processor_type": "baseline_simple",
+  "total_cycles": 5000,
+  "estimated_instructions": 3000,
+  "total_branches": 149,
+  "total_mispredictions": 50,
+  "ipc": 0.6,
+  "misprediction_rate": 0.33557046979865773,
+  "branch_accuracy": 0.6644295302013423
+}
