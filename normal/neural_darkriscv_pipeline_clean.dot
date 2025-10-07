@@ -1,0 +1,55 @@
+digraph NeuralDarkRISCV_Pipeline_Clean {
+  rankdir=LR
+  graph [fontname="Helvetica", fontsize=11, overlap=false, splines=ortho]
+  node [fontname="Helvetica", fontsize=10, shape=rect]
+  edge [fontname="Helvetica", fontsize=9]
+
+  /* Pipeline stages */
+  PF  [label="[1] PF\nPrefetch / PC update"]
+  IF  [label="[2] IF\nInstruction Fetch"]
+  ID  [label="[3] ID\nDecode & Reg-read"]
+  EX  [label="[4] EX\nExecute / Branch resolve"]
+  MEM [label="[5] MEM\nMemory Access"]
+  WB  [label="[6] WB\nWriteback"]
+
+  /* Core / toolchain context */
+  CORE_TOP [label="DarkRISCV Core\n(neural_darkriscv)"]
+  TOOLCHAIN [label="Toolchain\nsw -> objcopy -> .hex/.bin"]
+
+  /* Perceptron predictor (simple) */
+  P_IFACE  [label="(A) Predictor IF\npc->index -> prediction+conf"]
+  P_TABLE  [label="(B) Perceptron Table\nweights (BRAM)"]
+  P_GHR    [label="(C) GHR\nglobal history register"]
+  P_DOT    [label="(D) Dot Product Unit\n(pipelined)"]
+  P_UPDATE [label="(E) Update Path\ntrain on resolve"]
+
+  /* Main instruction path */
+  PF -> IF -> ID -> EX -> MEM -> WB
+
+  /* Predictor integration */
+  P_IFACE -> IF  [color=green, penwidth=2, label="speculative PC"]
+  IF -> P_IFACE  [style=dashed, label="pc index"]
+  ID -> P_IFACE  [style=dashed, label="predict request"]
+  P_GHR -> P_DOT
+  P_TABLE -> P_DOT
+  P_DOT -> P_IFACE
+  EX -> P_UPDATE  [label="actual outcome"]
+  P_UPDATE -> P_TABLE [style=dashed, label="write weights"]
+  EX -> IF [color=red, penwidth=2, label="mispredict -> flush"]
+
+  /* Bypass / forwarding to reduce stalls */
+  EX -> ID  [color=orange, label="forward ALU result"]
+  MEM -> ID [color=orange, label="forward load result"]
+  WB  -> ID [color=orange, label="writeback available"]
+
+  /* Context links */
+  TOOLCHAIN -> IF [label=".hex/.bin -> instr mem"]
+  CORE_TOP -> PF [style=dotted, arrowhead=none]
+
+  /* Small notes */
+  STALL_NOTE [shape=note, label="Stall avoidance:\n- Predictor reduces control stalls\n- Forwarding reduces data stalls\n- Mispredict flush updates predictor"]
+  EDIT_NOTE  [shape=note, label="Edit: rtl/core/neural_darkriscv.v\nrtl/perceptron/*.sv\nrtl/common/config.vh\nsw/benchmarks/linker.ld"]
+
+  { rank=same; CORE_TOP; TOOLCHAIN }
+  { rank=same; STALL_NOTE; EDIT_NOTE }
+}

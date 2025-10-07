@@ -1,0 +1,60 @@
+digraph NeuralDarkRISCV {
+  rankdir=LR;
+  node [shape=rect, fontsize=10, fontname="Helvetica"];
+
+  /* Top-level SoC */
+  subgraph cluster_soc {
+    label="neural_darkriscv SoC (top)";
+    style=rounded;
+    color=black;
+
+    /* Instruction path */
+    PC [label="PC\n(PC update)", shape=rect];
+    ICache [label="Instruction Cache\n(IF/ICACHE)", shape=rect];
+    IF_ID [label="IF -> ID\nInstruction Decode", shape=rect];
+    ID [label="ID Stage\n(decoder, reg read)", shape=rect];
+
+    /* Execute stage with parallel ALUs */
+    EX [label="EX (Execute)\nParallel ALUs:\n- ALU (reg/reg, reg/imm)\n- Branch ALU\n- PC ALU\n- MemAddr ALU", shape=rect];
+    REGFILE [label="Register File\n(comb read, clocked write)", shape=rect];
+
+    /* Memory path */
+    DCACHE [label="Data Cache\n(D-cache / Data I/O)", shape=rect];
+    MEM_BUS [label="SoC Bus / BRAM / SDRAM", shape=rect];
+
+    /* Perceptron predictor cluster */
+    subgraph cluster_perc {
+      label="Perceptron Branch Predictor";
+      style=dashed;
+      GHR [label="Global History Register\n(shift register)"];
+      PTABLE [label="Perceptron Table\n(weights BRAM)"];
+      DOT [label="Dot Product Unit\n(pipelined)"];
+      PRED_IF [label="Prediction interface\n(pc -> index)"];
+    }
+
+    /* Connections */
+    PC -> ICache -> IF_ID -> ID -> EX -> DCACHE -> MEM_BUS;
+    REGFILE -> EX;
+    ID -> REGFILE;
+    MEM_BUS -> DCACHE;
+    IF_ID -> PRED_IF;
+    PRED_IF -> PTABLE;
+    PTABLE -> DOT;
+    GHR -> DOT;
+    DOT -> ID [label="branch_prediction\n(confidence)"];
+    ID -> GHR [label="update_on_resolve"];
+    ID -> PTABLE [label="train/write (on mispred)"];
+  }
+
+  /* Software / Toolchain flow */
+  subgraph cluster_sw {
+    label="Software / Toolchain";
+    style=rounded;
+    SW [label="sw/*.elf, .hex\n(linker.ld, startup.s)"];
+    OBJCOPY [label="objcopy -> .hex/.bin"];
+  }
+  SW -> OBJCOPY -> MEM_BUS [label="memory init (.hex/.bin)"];
+
+  /* Notes (non-graph) */
+  note [shape=note, label="Key files to edit to change diagram:\n- rtl/core/neural_darkriscv.*\n- rtl/perceptron/*.sv (perceptron_predictor, perceptron_table, dot_product_unit, global_history_register)\n- rtl/common/config.vh (address map)\n- sw/benchmarks/linker.ld (memory layout)"];
+}

@@ -1,0 +1,87 @@
+digraph DarkRISCV_Arch {
+  rankdir=LR;
+  graph [fontsize=11, fontname="Helvetica"];
+  node [fontname="Helvetica", fontsize=10, shape=rect];
+  edge [fontname="Helvetica", fontsize=9];
+
+  /* Instruction fetch / front-end */
+  subgraph cluster_frontend {
+    label="Instruction Fetch / Front-end";
+    style=rounded;
+    PC      [label="PC\n(program counter)"];
+    IBUF    [label="Instruction Cache / ROM\n(instruction bus)"];
+    IF_PIPE [label="IF stage\n(instruction fetch latch)\nIDATA(IF)"];
+    IMM     [label="Immediate Extender\n(IMM)"];
+    PC -> IBUF;
+    IBUF -> IF_PIPE;
+    IF_PIPE -> IMM;
+  }
+
+  /* Decode / Register file */
+  subgraph cluster_decode {
+    label="Decode / Register File";
+    style=rounded;
+    ID_DECODE [label="Instruction Decode\n(parse opcode/fields)"];
+    REGFILE   [label="Register File\n(read: combinational, write: clocked)"];
+    IF_PIPE -> ID_DECODE;
+    ID_DECODE -> REGFILE [label="read regs"];
+  }
+
+  /* Execution cluster: multiple ALUs and branch logic */
+  subgraph cluster_execute {
+    label="Execution\n(multiple ALUs, branch logic)";
+    style=rounded;
+    ALU_REGREG [label="ALU (REG / REG)"];
+    ALU_REGIMM [label="ALU (REG / IMM)"];
+    ALU_PC     [label="PC ALU\n(next-PC calc)"];
+    COND_BR    [label="Conditional Branch Logic\n(comparator + decision)"];
+    ALU_REGREG -> COND_BR;
+    ALU_REGIMM -> COND_BR;
+    ALU_PC -> COND_BR;
+  }
+
+  /* Register outputs feed ALUs */
+  REGFILE -> ALU_REGREG [label="rs1, rs2"];
+  REGFILE -> ALU_REGIMM [label="rs1"];
+  IMM     -> ALU_REGIMM [label="imm"];
+  PC      -> ALU_PC       [label="PC value"];
+
+  /* Branch feedback and next PC */
+  COND_BR -> ALU_PC [label="selected next-PC"];
+  ALU_PC -> PC     [label="update PC\n(next PC)"];
+
+  /* Data memory / cache and I/O */
+  subgraph cluster_mem {
+    label="Data Path / Memory";
+    style=rounded;
+    DCACHE [label="Data Cache / Data I/O Bus"];
+    STORE  [label="STORE (addr & data)"];
+    LOAD   [label="LOAD (data out)"];
+    COND_BR -> STORE [label="store (if store inst)", style=dashed];
+    COND_BR -> LOAD  [label="load (if load inst)", style=dashed];
+    STORE -> DCACHE;
+    DCACHE -> LOAD;
+  }
+
+  /* Writeback */
+  WB [label="Writeback\n(write ALU/mem results -> regfile)"];
+  MEM_RET [label="ALU/MEM result"] ;
+  ALU_REGREG -> MEM_RET [style=dotted];
+  ALU_REGIMM -> MEM_RET [style=dotted];
+  DCACHE -> MEM_RET [style=dotted];
+  MEM_RET -> WB;
+  WB -> REGFILE [label="writeback"];
+
+  /* Control / misc */
+  RESET [label="CLK / HLT / RES", shape=note];
+  RESET -> PC [style=dotted];
+
+  /* Layout hints */
+  { rank = same; PC; IBUF; IF_PIPE; }
+  { rank = same; ID_DECODE; REGFILE; }
+  { rank = same; ALU_REGREG; ALU_REGIMM; ALU_PC; }
+  { rank = same; DCACHE; WB; }
+
+  /* Legend */
+  legend [shape=note, label="Diagram: IF -> ID -> EX -> MEM -> WB\nRegisters feed ALUs; branch logic selects next PC\nInstruction cache supplies IF; data cache supplies MEM"];
+}

@@ -1,0 +1,177 @@
+path of the folder -> /home/abc/neural-riscv-project
+
+name of the folder -> neural-riscv-project
+
+
+inside /home/abc/neural-riscv-project
+we have folders and files ->
+APRATIM@APRATIM:~/neural-riscv-project$ ls
+baseline-core            final_build.sh  LICENSE    rtl      sw
+create_project_files.py  fpga            README.md  scripts  tb
+docs                     images          results    sim      temp_test
+
+
+in baseline core -
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core$ ls
+boards       darkriscv.core  LICENSE   MODULE.bazel       README.md  sim  tmp
+BUILD.bazel  doc             Makefile  MODULE.bazel.lock  rtl        src
+
+boards->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/boards$ ls
+aliexpress_hpc40gbe_k420     lattice_brevia2_xp2     qmtech_cyclone10_cl016
+aliexpress_hpc40gbe_xcku040  Makefile                qmtech_kintex7_k325
+avnet_microboard_lx9         max1000_max10           qmtech_sdram_lx16
+colorlighti5                 openroad                qmtech_spartan7_s15
+colorlighti9                 papilio_duo_logicstart  README.md
+de10nano_cyclonev_mister     piswords_ch34x_lx16     scarab_minispartan6-plus_lx9
+digilent_spartan3_s200       piswords_rs485_lx9      ulx3s
+ice40_breakout_hx8k          qmtech_artix7_a35       xilinx_ac701_a200
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/boards$ 
+
+in docs->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/doc$ ls
+boot.png  darkriscv.png  darksocv.png
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/doc$ 
+
+
+in rtl -> 
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core$ cd rtl
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl$ ls
+config.vh     darkio.v   darkram.v    darkspi.v   README.md
+darkbridge.v  darkmac.v  darkriscv.v  darkuart.v
+darkcache.v   darkpll.v  darksocv.v   lib
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl$ 
+
+in rtl/lib ->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl$ ls
+config.vh     darkio.v   darkram.v    darkspi.v   README.md
+darkbridge.v  darkmac.v  darkriscv.v  darkuart.v
+darkcache.v   darkpll.v  darksocv.v   lib
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl$ cd lib
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib$ ls
+sdram  spi
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib$ cd sdram/
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib/sdram$ ls
+mt48lc16m16a2_ctrl.v
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib/sdram$ cd ..
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib$ cd spi
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib/spi$ ls
+darksocv.gtkw  LICENSE  lis3dh_stub.v  spi_master_bb.v  spi_master.v
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/rtl/lib/spi$ 
+
+in sim ->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core$ cd sim
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/sim$ ls
+cosim.mk  darksimv.v  Makefile  README.md  trace.py  Vdarksocv_gui.cpp
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/sim$ 
+
+in src->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src$ ls
+badapple   coremark   darksocv.lds  donut       primes
+boot.S     darklibc   darksocv.mem  Makefile    README.md
+config.mk  darkshell  dhrystone     mandelbrot  spidemo
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src$ 
+
+in badapple->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/badapple$ ls
+badapple.h  badapple.txt  main.c  Makefile
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/badapple$ 
+
+in coremark->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/coremark$ ls
+coremark.lds  core_portme.c  core_portme.h  ee_printf.c  Makefile  README.md  src
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/coremark$ 
+
+in donut ->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/donut$ ls
+main.c  Makefile  README.md
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/donut$ 
+
+in primes->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/primes$ ls
+main.c  Makefile  README.md
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/primes$ 
+
+in darklibc->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darklibc$ ls
+include  io.c  Makefile  misc.c  stdio.c  string.c  unistd.c  util.S
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darklibc$ 
+
+
+in include->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darklibc/include$ ls
+io.h  math.h  stddef.h  stdint.h  stdio.h  string.h  time.h  unistd.h
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darklibc/include$ 
+
+in darkshell->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darkshell$ ls
+main.c  Makefile  README.md
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/darkshell$ 
+
+
+in dhryshell->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/dhrystone$ ls
+dhry_1.c  dhry_2.c  dhry.h  LICENSE  Makefile  README.md
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/dhrystone$ 
+
+
+in mandelbrot->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/mandelbrot$ ls
+main.c  Makefile
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/mandelbrot$ 
+
+
+in spydemo->
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/spidemo$ ls
+main.c  Makefile  README.md  ser.py  SPIBB.md
+APRATIM@APRATIM:~/neural-riscv-project/baseline-core/src/spidemo$ 
+
+in rtl->
+APRATIM@APRATIM:~/neural-riscv-project$ ls
+baseline-core            final_build.sh  LICENSE    rtl      sw
+create_project_files.py  fpga            README.md  scripts  tb
+docs                     images          results    sim      temp_test
+APRATIM@APRATIM:~/neural-riscv-project$ cd rtl
+APRATIM@APRATIM:~/neural-riscv-project/rtl$ ls
+common  core  memory  perceptron  peripherals
+APRATIM@APRATIM:~/neural-riscv-project/rtl$ cd common/
+APRATIM@APRATIM:~/neural-riscv-project/rtl/common$ ls
+config.vh  darkbridge.v  darkio.v  darkpll.v  darkram.v
+APRATIM@APRATIM:~/neural-riscv-project/rtl/common$ 
+
+
+in core ->
+APRATIM@APRATIM:~/neural-riscv-project/rtl/core$ ls
+darkriscv.v  neural_darkriscv_core.v  ronanchip_top.sv
+darksocv.v   neural_darkriscv.v
+APRATIM@APRATIM:~/neural-riscv-project/rtl/core$ 
+
+in perceptron ->
+APRATIM@APRATIM:~/neural-riscv-project/rtl/perceptron$ ls
+dot_product_unit.sv         perceptron_predictor.sv
+global_history_register.sv  perceptron_table.sv
+APRATIM@APRATIM:~/neural-riscv-project/rtl/perceptron$ 
+
+
+in peripherals ->
+APRATIM@APRATIM:~/neural-riscv-project/rtl/peripherals$ ls
+darkuart.v
+APRATIM@APRATIM:~/neural-riscv-project/rtl/peripherals$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

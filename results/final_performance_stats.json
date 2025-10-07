@@ -1,0 +1,310 @@
+{
+  "total_cycles": 50000,
+  "total_instructions": 50000,
+  "total_branches": 0,
+  "total_mispredictions": 0,
+  "final_ipc": 1.0,
+  "final_mispred_rate": 0,
+  "history": [
+    {
+      "cycle": 1000,
+      "instructions": 1000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 2000,
+      "instructions": 2000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 3000,
+      "instructions": 3000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 4000,
+      "instructions": 4000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 5000,
+      "instructions": 5000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 6000,
+      "instructions": 6000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 7000,
+      "instructions": 7000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 8000,
+      "instructions": 8000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 9000,
+      "instructions": 9000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 10000,
+      "instructions": 10000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 11000,
+      "instructions": 11000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 12000,
+      "instructions": 12000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 13000,
+      "instructions": 13000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 14000,
+      "instructions": 14000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 15000,
+      "instructions": 15000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 16000,
+      "instructions": 16000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 17000,
+      "instructions": 17000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 18000,
+      "instructions": 18000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 19000,
+      "instructions": 19000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 20000,
+      "instructions": 20000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 21000,
+      "instructions": 21000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 22000,
+      "instructions": 22000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 23000,
+      "instructions": 23000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 24000,
+      "instructions": 24000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 25000,
+      "instructions": 25000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 26000,
+      "instructions": 26000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 27000,
+      "instructions": 27000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 28000,
+      "instructions": 28000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 29000,
+      "instructions": 29000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 30000,
+      "instructions": 30000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 31000,
+      "instructions": 31000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 32000,
+      "instructions": 32000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 33000,
+      "instructions": 33000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 34000,
+      "instructions": 34000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 35000,
+      "instructions": 35000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 36000,
+      "instructions": 36000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 37000,
+      "instructions": 37000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 38000,
+      "instructions": 38000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 39000,
+      "instructions": 39000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 40000,
+      "instructions": 40000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 41000,
+      "instructions": 41000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 42000,
+      "instructions": 42000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 43000,
+      "instructions": 43000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 44000,
+      "instructions": 44000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 45000,
+      "instructions": 45000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 46000,
+      "instructions": 46000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 47000,
+      "instructions": 47000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 48000,
+      "instructions": 48000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 49000,
+      "instructions": 49000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    },
+    {
+      "cycle": 50000,
+      "instructions": 50000,
+      "ipc": 1.0,
+      "mispred_rate": 0
+    }
+  ]
+}

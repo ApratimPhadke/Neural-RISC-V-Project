@@ -1,0 +1,92 @@
+digraph DarkRISCV_Clean {
+    rankdir=LR;
+    graph [fontsize=12, fontname="Arial", splines=ortho, nodesep=0.8, ranksep=1.2];
+    node [fontname="Arial", fontsize=10, shape=box, style="rounded,filled", fillcolor=lightblue];
+    edge [fontname="Arial", fontsize=9];
+
+    // Main pipeline stages (top row)
+    subgraph cluster_main_pipeline {
+        label="Main RISC-V Pipeline";
+        style="rounded,filled";
+        fillcolor=lightgray;
+        
+        PC [label="Program\nCounter", fillcolor=lightgreen];
+        FETCH [label="Instruction\nFetch", fillcolor=lightgreen];
+        DECODE [label="Instruction\nDecode", fillcolor=lightyellow];
+        EXECUTE [label="Execute\n(ALU + Branch)", fillcolor=lightcoral];
+        MEMORY [label="Memory\nAccess", fillcolor=lightcyan];
+        WRITEBACK [label="Write\nBack", fillcolor=lightpink];
+        
+        PC -> FETCH -> DECODE -> EXECUTE -> MEMORY -> WRITEBACK;
+    }
+
+    // Branch predictor (bottom section)
+    subgraph cluster_predictor {
+        label="Perceptron Branch Predictor";
+        style="rounded,filled";
+        fillcolor=wheat;
+        
+        PRED_INTERFACE [label="Prediction\nInterface", fillcolor=gold];
+        PERCEPTRON_TABLE [label="Perceptron\nTable (BRAM)", fillcolor=gold];
+        GLOBAL_HISTORY [label="Global History\nRegister", fillcolor=gold];
+        DOT_PRODUCT [label="Dot Product\nUnit", fillcolor=gold];
+        UPDATE_LOGIC [label="Update &\nTraining", fillcolor=gold];
+        
+        // Predictor internal flow
+        PRED_INTERFACE -> PERCEPTRON_TABLE;
+        PERCEPTRON_TABLE -> DOT_PRODUCT;
+        GLOBAL_HISTORY -> DOT_PRODUCT;
+        DOT_PRODUCT -> PRED_INTERFACE;
+        UPDATE_LOGIC -> PERCEPTRON_TABLE;
+        UPDATE_LOGIC -> GLOBAL_HISTORY;
+    }
+
+    // Supporting components (side)
+    REGFILE [label="Register\nFile", fillcolor=lightsteelblue];
+    IMEM [label="Instruction\nMemory", fillcolor=lightsteelblue];
+    DMEM [label="Data\nMemory", fillcolor=lightsteelblue];
+    IMM_EXT [label="Immediate\nExtender", fillcolor=lightsteelblue];
+
+    // Main pipeline connections
+    IMEM -> FETCH;
+    FETCH -> IMM_EXT;
+    IMM_EXT -> EXECUTE;
+    DECODE -> REGFILE;
+    REGFILE -> EXECUTE;
+    EXECUTE -> DMEM;
+    DMEM -> MEMORY;
+    MEMORY -> WRITEBACK;
+    WRITEBACK -> REGFILE;
+
+    // Branch predictor connections
+    FETCH -> PRED_INTERFACE [label="PC", color=blue, style=bold];
+    PRED_INTERFACE -> PC [label="Predicted\nNext PC", color=green, style=bold];
+    EXECUTE -> UPDATE_LOGIC [label="Branch\nOutcome", color=red, style=bold];
+    EXECUTE -> FETCH [label="Mispredict\nFlush", color=red, style=dashed];
+
+    // Toolchain
+    TOOLCHAIN [label="Toolchain\n(.hex/.bin)", shape=note, fillcolor=white];
+    TOOLCHAIN -> IMEM;
+    TOOLCHAIN -> DMEM;
+
+    // Control signals
+    RESET [label="CLK/RST/HLT", shape=diamond, fillcolor=orange];
+    RESET -> PC [style=dotted];
+
+    // Layout hints
+    {rank=same; PC; FETCH; DECODE; EXECUTE; MEMORY; WRITEBACK;}
+    {rank=same; PRED_INTERFACE; PERCEPTRON_TABLE; DOT_PRODUCT;}
+    {rank=same; REGFILE; IMEM; DMEM; IMM_EXT;}
+
+    // Legend
+    LEGEND [shape=plaintext, label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+        <TR><TD BGCOLOR="lightgray"><B>Pipeline Flow</B></TD></TR>
+        <TR><TD>IF → ID → EX → MEM → WB</TD></TR>
+        <TR><TD BGCOLOR="wheat"><B>Branch Prediction</B></TD></TR>
+        <TR><TD><FONT COLOR="blue">Prediction Request</FONT></TD></TR>
+        <TR><TD><FONT COLOR="green">Predicted Branch</FONT></TD></TR>
+        <TR><TD><FONT COLOR="red">Mispredict/Update</FONT></TD></TR>
+        </TABLE>
+    >];
+}

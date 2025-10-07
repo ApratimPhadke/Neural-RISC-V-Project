@@ -1,0 +1,423 @@
+digraph DarkRISCV_Spacious {
+    rankdir=TB;
+    graph [
+        fontsize=14, 
+        fontname="Arial", 
+        splines=ortho, 
+        nodesep=1.5, 
+        ranksep=2.0,
+        pad=1.0,
+        size="20,16!"
+    ];
+    
+    node [
+        fontname="Arial", 
+        fontsize=11, 
+        shape=box, 
+        style="rounded,filled", 
+        width=2.0,
+        height=1.2,
+        margin=0.3
+    ];
+    
+    edge [
+        fontname="Arial", 
+        fontsize=10,
+        penwidth=2
+    ];
+
+    // Title
+    TITLE [
+        label="DarkRISCV with Perceptron Branch Predictor",
+        shape=plaintext,
+        fontsize=18,
+        fontname="Arial Bold"
+    ];
+
+    // ============ INSTRUCTION FETCH STAGE ============
+    subgraph cluster_fetch {
+        label="📍 INSTRUCTION FETCH STAGE";
+        style="rounded,filled";
+        fillcolor="#E6F3FF";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        PC [
+            label="Program Counter\n(PC)\n\n🎯 Current Address",
+            fillcolor="#87CEEB",
+            width=2.5
+        ];
+        
+        IMEM [
+            label="Instruction Memory\n(ROM/Cache)\n\n📚 Store Instructions",
+            fillcolor="#87CEEB",
+            width=2.5
+        ];
+        
+        IFETCH [
+            label="Instruction Fetch\n(IF Stage)\n\n📥 Get Next Instruction",
+            fillcolor="#87CEEB",
+            width=2.5
+        ];
+    }
+
+    // ============ DECODE STAGE ============
+    subgraph cluster_decode {
+        label="🔍 DECODE STAGE";
+        style="rounded,filled";
+        fillcolor="#FFF8DC";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        DECODE [
+            label="Instruction Decode\n(ID Stage)\n\n🧩 Parse Opcode & Fields",
+            fillcolor="#F0E68C",
+            width=2.5
+        ];
+        
+        REGFILE [
+            label="Register File\n(32 Registers)\n\n💾 Store Data",
+            fillcolor="#F0E68C",
+            width=2.5
+        ];
+        
+        IMM_GEN [
+            label="Immediate Generator\n\n🔢 Extract Constants",
+            fillcolor="#F0E68C",
+            width=2.5
+        ];
+    }
+
+    // ============ EXECUTE STAGE ============
+    subgraph cluster_execute {
+        label="⚙️ EXECUTE STAGE";
+        style="rounded,filled";
+        fillcolor="#FFE4E1";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        ALU [
+            label="Arithmetic Logic Unit\n(ALU)\n\n🧮 Math & Logic Ops",
+            fillcolor="#FFA07A",
+            width=2.5
+        ];
+        
+        BRANCH_UNIT [
+            label="Branch Unit\n\n🔀 Compare & Decide",
+            fillcolor="#FFA07A",
+            width=2.5
+        ];
+        
+        PC_CALC [
+            label="PC Calculator\n\n➡️ Next Address Logic",
+            fillcolor="#FFA07A",
+            width=2.5
+        ];
+    }
+
+    // ============ MEMORY STAGE ============
+    subgraph cluster_memory {
+        label="💽 MEMORY STAGE";
+        style="rounded,filled";
+        fillcolor="#E0FFFF";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        DMEM [
+            label="Data Memory\n(RAM/Cache)\n\n🗄️ Load/Store Data",
+            fillcolor="#AFEEEE",
+            width=2.5
+        ];
+        
+        MEM_CTRL [
+            label="Memory Controller\n\n🎛️ Address & Control",
+            fillcolor="#AFEEEE",
+            width=2.5
+        ];
+    }
+
+    // ============ WRITEBACK STAGE ============
+    subgraph cluster_writeback {
+        label="✍️ WRITEBACK STAGE";
+        style="rounded,filled";
+        fillcolor="#F0F8FF";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        WB_MUX [
+            label="Writeback Multiplexer\n\n🔄 Select Result Source",
+            fillcolor="#DDA0DD",
+            width=2.5
+        ];
+    }
+
+    // ============ BRANCH PREDICTOR ============
+    subgraph cluster_predictor {
+        label="🧠 PERCEPTRON BRANCH PREDICTOR";
+        style="rounded,filled";
+        fillcolor="#F5F5DC";
+        fontsize=14;
+        fontname="Arial Bold";
+        
+        PRED_IFACE [
+            label="Prediction Interface\n\n🎯 PC → Prediction",
+            fillcolor="#DAA520",
+            width=2.5
+        ];
+        
+        PERC_TABLE [
+            label="Perceptron Table\n(BRAM Storage)\n\n📊 Weight Vectors",
+            fillcolor="#DAA520",
+            width=2.5
+        ];
+        
+        GHR [
+            label="Global History Register\n(Shift Register)\n\n📜 Branch History",
+            fillcolor="#DAA520",
+            width=2.5
+        ];
+        
+        DOT_PROD [
+            label="Dot Product Unit\n(Neural Network)\n\n🧮 Σ(weights × history)",
+            fillcolor="#DAA520",
+            width=2.5
+        ];
+        
+        UPDATE_UNIT [
+            label="Update & Training Unit\n\n🎓 Learn from Mistakes",
+            fillcolor="#DAA520",
+            width=2.5
+        ];
+    }
+
+    // ============ SUPPORT COMPONENTS ============
+    TOOLCHAIN [
+        label="Development Toolchain\n(.hex/.bin files)\n\n🔨 Compile & Load",
+        shape=note,
+        fillcolor="#FFFACD",
+        width=2.5
+    ];
+    
+    RESET_CLK [
+        label="Clock & Reset\n\n⏰ System Timing",
+        shape=diamond,
+        fillcolor="#FFB6C1",
+        width=2.0
+    ];
+
+    // ============ MAIN PIPELINE FLOW ============
+    PC -> IMEM [
+        label="Address",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    IMEM -> IFETCH [
+        label="Instruction",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    IFETCH -> DECODE [
+        label="32-bit Instr",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    DECODE -> REGFILE [
+        label="Reg Addresses",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    DECODE -> IMM_GEN [
+        label="Immediate",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    REGFILE -> ALU [
+        label="Source Data",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    IMM_GEN -> ALU [
+        label="Constant",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    ALU -> BRANCH_UNIT [
+        label="Compare Result",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    BRANCH_UNIT -> PC_CALC [
+        label="Branch Decision",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    PC_CALC -> MEM_CTRL [
+        label="Memory Request",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    MEM_CTRL -> DMEM [
+        label="Address/Data",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    DMEM -> WB_MUX [
+        label="Load Data",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    ALU -> WB_MUX [
+        label="ALU Result",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+    
+    WB_MUX -> REGFILE [
+        label="Write Data",
+        color="#0066CC",
+        penwidth=3,
+        fontcolor="#0066CC"
+    ];
+
+    // ============ BRANCH PREDICTOR FLOWS ============
+    
+    // Prediction Path (Green - Good Predictions)
+    IFETCH -> PRED_IFACE [
+        label="PC Index",
+        color="#00AA00",
+        penwidth=4,
+        style=bold,
+        fontcolor="#00AA00"
+    ];
+    
+    PRED_IFACE -> PERC_TABLE [
+        label="Lookup",
+        color="#00AA00",
+        penwidth=3,
+        fontcolor="#00AA00"
+    ];
+    
+    PERC_TABLE -> DOT_PROD [
+        label="Weights",
+        color="#00AA00",
+        penwidth=3,
+        fontcolor="#00AA00"
+    ];
+    
+    GHR -> DOT_PROD [
+        label="History",
+        color="#00AA00",
+        penwidth=3,
+        fontcolor="#00AA00"
+    ];
+    
+    DOT_PROD -> PRED_IFACE [
+        label="Prediction",
+        color="#00AA00",
+        penwidth=3,
+        fontcolor="#00AA00"
+    ];
+    
+    PRED_IFACE -> PC [
+        label="Speculative PC",
+        color="#00AA00",
+        penwidth=4,
+        style=bold,
+        fontcolor="#00AA00"
+    ];
+
+    // Training Path (Red - Learning from Errors)
+    BRANCH_UNIT -> UPDATE_UNIT [
+        label="Actual Outcome",
+        color="#CC0000",
+        penwidth=4,
+        style=bold,
+        fontcolor="#CC0000"
+    ];
+    
+    UPDATE_UNIT -> PERC_TABLE [
+        label="Weight Updates",
+        color="#CC0000",
+        penwidth=3,
+        fontcolor="#CC0000"
+    ];
+    
+    UPDATE_UNIT -> GHR [
+        label="History Update",
+        color="#CC0000",
+        penwidth=3,
+        fontcolor="#CC0000"
+    ];
+    
+    // Mispredict Recovery (Orange - Error Handling)
+    BRANCH_UNIT -> IFETCH [
+        label="Flush Pipeline",
+        color="#FF6600",
+        penwidth=3,
+        style=dashed,
+        fontcolor="#FF6600"
+    ];
+
+    // ============ SYSTEM CONNECTIONS ============
+    TOOLCHAIN -> IMEM [
+        label="Load Program",
+        color="#666666",
+        style=dotted
+    ];
+    
+    RESET_CLK -> PC [
+        label="Reset/Clock",
+        color="#666666",
+        style=dotted
+    ];
+
+    // ============ LAYOUT ORGANIZATION ============
+    {rank=same; PC; IMEM; IFETCH;}
+    {rank=same; DECODE; REGFILE; IMM_GEN;}
+    {rank=same; ALU; BRANCH_UNIT; PC_CALC;}
+    {rank=same; MEM_CTRL; DMEM;}
+    {rank=same; WB_MUX;}
+    {rank=same; PRED_IFACE; PERC_TABLE; GHR;}
+    {rank=same; DOT_PROD; UPDATE_UNIT;}
+
+    // ============ LEGEND ============
+    LEGEND [
+        shape=plaintext,
+        fontsize=12,
+        label=<
+            <TABLE BORDER="2" CELLBORDER="1" CELLSPACING="4" CELLPADDING="8">
+            <TR><TD COLSPAN="2" BGCOLOR="#F0F0F0"><B>🔍 LEGEND</B></TD></TR>
+            <TR><TD BGCOLOR="#0066CC"><FONT COLOR="white"><B>Main Pipeline</B></FONT></TD><TD>Standard RISC-V execution flow</TD></TR>
+            <TR><TD BGCOLOR="#00AA00"><FONT COLOR="white"><B>Prediction Path</B></FONT></TD><TD>Branch prediction &amp; speculation</TD></TR>
+            <TR><TD BGCOLOR="#CC0000"><FONT COLOR="white"><B>Training Path</B></FONT></TD><TD>Learning from branch outcomes</TD></TR>
+            <TR><TD BGCOLOR="#FF6600"><FONT COLOR="white"><B>Error Recovery</B></FONT></TD><TD>Misprediction handling</TD></TR>
+            <TR><TD BGCOLOR="#666666"><FONT COLOR="white"><B>System Control</B></FONT></TD><TD>Clock, reset, program loading</TD></TR>
+            </TABLE>
+        >
+    ];
+}
