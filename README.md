@@ -260,18 +260,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ---
 
-## 📚 Documentation
 
-Comprehensive documentation is available:
-
-- 📖 **[Installation Guide](docs/installation/README.md)** - Detailed setup instructions
-- 🚀 **[Quick Start Guide](docs/usage/quickstart.md)** - Get started quickly
-- 🏗️ **[Architecture Overview](docs/architecture.md)** - Deep dive into design
-- 🔧 **[API Reference](docs/api/README.md)** - Module interfaces
-- 🐛 **[Troubleshooting](docs/troubleshooting/README.md)** - Common issues
-- 📊 **[Performance Guide](docs/performance.md)** - Optimization tips
-
----
 
 ## 🔍 Key Features Explained
 
